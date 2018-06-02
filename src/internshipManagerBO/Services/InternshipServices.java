@@ -22,7 +22,6 @@ public class InternshipServices {
         try {
             trans = session.beginTransaction();
             allInternships = session.createQuery("from Internship").list();
-            
         } catch (RuntimeException e){
             e.printStackTrace();
         } finally {

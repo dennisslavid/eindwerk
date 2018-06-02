@@ -99,9 +99,10 @@ public class Organisation  implements java.io.Serializable {
         this.internships = internships;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
 
 
