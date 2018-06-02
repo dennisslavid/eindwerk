@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2-jun-2018 13:00:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="internshipManagerDAL.Entities.Internship" table="internship" catalog="internshipmanagerdb" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="organisation" class="internshipManagerDAL.Entities.Organisation" fetch="select">
+            <column name="organisationID" not-null="true" />
+        </many-to-one>
+        <property name="title" type="string">
+            <column name="title" length="50" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="3000" not-null="true" />
+        </property>
+        <property name="startDate" type="date">
+            <column name="startDate" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

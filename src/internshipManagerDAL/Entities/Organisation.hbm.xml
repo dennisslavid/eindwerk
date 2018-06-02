@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2-jun-2018 13:00:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="internshipManagerDAL.Entities.Organisation" table="organisation" catalog="internshipmanagerdb" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="200" not-null="true" />
+        </property>
+        <property name="streetAddress" type="string">
+            <column name="streetAddress" length="300" not-null="true" />
+        </property>
+        <property name="zipCode" type="string">
+            <column name="zipCode" length="20" not-null="true" />
+        </property>
+        <property name="city" type="string">
+            <column name="city" length="50" not-null="true" />
+        </property>
+        <property name="contactPerson" type="string">
+            <column name="contactPerson" length="50" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" not-null="true" />
+        </property>
+        <set name="internships" table="internship" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="organisationID" not-null="true" />
+            </key>
+            <one-to-many class="internshipManagerDAL.Entities.Internship" />
+        </set>
+    </class>
+</hibernate-mapping>
