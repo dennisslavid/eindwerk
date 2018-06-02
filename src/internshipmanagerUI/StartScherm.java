@@ -5,8 +5,10 @@
  */
 package internshipmanagerUI;
 
-import internshipManagerDAL.NewHibernateUtil;
-import org.hibernate.Session;
+import internshipManagerBO.Services.InternshipServices;
+import internshipManagerDAL.Entities.Internship;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,11 +16,16 @@ import org.hibernate.Session;
  */
 public class StartScherm extends javax.swing.JFrame {
 
+    List<Internship> allInternships = new ArrayList<>();
+    InternshipServices interServices = new InternshipServices();
+    
     /**
      * Creates new form StartScherm
      */
     public StartScherm() {
         initComponents();
+        allInternships = interServices.getAllInternships();
+        lstInternships.setListData(allInternships.toArray());
     }
 
     /**
@@ -30,12 +37,12 @@ public class StartScherm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        internshipsLbl = new javax.swing.JLabel();
+        lblInternships = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        internshipLst = new javax.swing.JList<>();
+        lstInternships = new javax.swing.JList();
         lblSearch = new javax.swing.JLabel();
         cbxSearch = new javax.swing.JComboBox<>();
         txtSearch = new javax.swing.JTextField();
@@ -43,7 +50,7 @@ public class StartScherm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Internship Manager");
 
-        internshipsLbl.setText("Internships:");
+        lblInternships.setText("Internships:");
 
         btnAdd.setText("Add New Internship");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -56,7 +63,7 @@ public class StartScherm extends javax.swing.JFrame {
 
         btnDelete.setText("Delete Internship");
 
-        jScrollPane1.setViewportView(internshipLst);
+        jScrollPane1.setViewportView(lstInternships);
 
         lblSearch.setText("Search by:");
 
@@ -82,7 +89,7 @@ public class StartScherm extends javax.swing.JFrame {
                     .addComponent(btnEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(internshipsLbl)
+                        .addComponent(lblInternships)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -90,7 +97,7 @@ public class StartScherm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(internshipsLbl)
+                .addComponent(lblInternships)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -154,10 +161,10 @@ public class StartScherm extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JComboBox<String> cbxSearch;
-    private javax.swing.JList<String> internshipLst;
-    private javax.swing.JLabel internshipsLbl;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblInternships;
     private javax.swing.JLabel lblSearch;
+    private javax.swing.JList lstInternships;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

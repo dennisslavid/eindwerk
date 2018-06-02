@@ -2,6 +2,7 @@ package internshipManagerDAL.Entities;
 // Generated 2-jun-2018 13:00:17 by Hibernate Tools 4.3.1
 
 
+import internshipManagerBO.Services.InternshipServices;
 import java.util.Date;
 
 /**
@@ -60,6 +61,13 @@ public class Internship  implements java.io.Serializable {
     
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+    
+    @Override
+    public String toString() {
+        InternshipServices service = new InternshipServices();
+        String organisationName = service.getInternshipOrganisationName(this.id);
+        return this.title + ", " + organisationName;
     }
 
 
