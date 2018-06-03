@@ -3,9 +3,12 @@ package internshipManagerBO.Services;
 import internshipManagerDAL.Entities.Internship;
 import internshipManagerDAL.Entities.Organisation;
 import internshipManagerDAL.NewHibernateUtil;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -60,23 +63,21 @@ public class InternshipServices {
         boolean result = false;
         if(!"".equals(title) && !"".equals(startDate) && !"".equals(description) 
                 && noOrgSelected != true) {
-            try {
-                this.transformToDate(startDate);
+            if(this.transformToDate(startDate) != null) {
                 result = true;
-            } catch (Exception e) {
-                result = false;
             }
         }
         return result;
     }
     
-    public LocalDate transformToDate(String startDate) {
-        String[] choppedDate;
-        LocalDate formattedDate;
-        choppedDate = startDate.split("/");
-        formattedDate = LocalDate.of(Integer.parseInt(choppedDate[2]), 
-                                Integer.parseInt(choppedDate[1]), 
-                                Integer.parseInt(choppedDate[0]));
+    public Calendar transformToDate(String startDate) {
+        Calendar formattedDate = Calendar.getInstance();
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            formattedDate.setTime(formatter.parse(startDate));
+        } catch (ParseException e) {
+            formattedDate = null;
+        }
         return formattedDate;
     }
 }

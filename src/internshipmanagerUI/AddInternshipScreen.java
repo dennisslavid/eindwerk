@@ -4,11 +4,9 @@ import internshipManagerBO.Services.InternshipServices;
 import internshipManagerBO.Services.OrganisationServices;
 import internshipManagerDAL.Entities.Internship;
 import internshipManagerDAL.Entities.Organisation;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -173,7 +171,7 @@ public class AddInternshipScreen extends javax.swing.JFrame {
         String startDate = ftfDate.getText();
         String description = txtDescription.getText();
         Organisation org = null;
-        LocalDate formattedStartDate = null;
+        Calendar formattedStartDate = null;
         boolean noOrgSelected = lstOrganisations.isSelectionEmpty();
         if(noOrgSelected != true) {
             org = (Organisation) lstOrganisations.getSelectedValue();
@@ -181,11 +179,11 @@ public class AddInternshipScreen extends javax.swing.JFrame {
         if(internServices.inputIsValid(title, startDate, description, noOrgSelected) != true) {
             lblOutput.setText("Please fill all fields correctly.");
         } else {
-           //formattedStartDate = internServices.transformToDate(startDate);
-           //newInternship.setTitle(title);
-           //newInternship.setStartDate(formattedStartDate);
-           //newInternship.setDescription(description);
-           //newInternship.setOrganisation(org);
+           formattedStartDate = internServices.transformToDate(startDate);
+           newInternship.setTitle(title);
+           newInternship.setStartDate(new java.sql.Date(formattedStartDate.getTimeInMillis()));
+           newInternship.setDescription(description);
+           newInternship.setOrganisation(org);
            lblOutput.setText("This is the point where I would Save :D");
         }
     }//GEN-LAST:event_btnSaveActionPerformed
