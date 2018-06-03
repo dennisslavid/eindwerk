@@ -16,6 +16,7 @@ import org.hibernate.Transaction;
  * @author denni
  */
 public class OrganisationDA {
+    
     public List<Organisation> getAllOrganisations() {
         List<Organisation> allOrganisations = new ArrayList<>();
         Transaction trans = null;
@@ -30,5 +31,23 @@ public class OrganisationDA {
             session.close();
         }
         return allOrganisations;
+    }
+    
+    public void saveOrganisation(Organisation newOrganisation) {
+        Transaction trans = null;
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            trans = session.beginTransaction();
+            session.save(newOrganisation);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            if(trans != null) {
+                trans.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
     }
 }

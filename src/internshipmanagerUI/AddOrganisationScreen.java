@@ -5,17 +5,24 @@
  */
 package internshipmanagerUI;
 
+import internshipManagerBO.Services.OrganisationServices;
+import internshipManagerDAL.Entities.Organisation;
+
 /**
  *
  * @author denni
  */
 public class AddOrganisationScreen extends javax.swing.JFrame {
-
+    
+    OrganisationServices orgServices = new OrganisationServices();
+    Organisation currentOrganisation = new Organisation();
+    
     /**
      * Creates new form AddOrganisationScreen
      */
     public AddOrganisationScreen() {
         initComponents();
+        this.setTitle("Add new organisation");
     }
 
     /**
@@ -59,12 +66,20 @@ public class AddOrganisationScreen extends javax.swing.JFrame {
         lblEmail.setText("Email:");
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         barInfo.setRollover(true);
-
-        lblOutput.setText("Een eventueel bericht...");
         barInfo.add(lblOutput);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -135,6 +150,36 @@ public class AddOrganisationScreen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        String name = txtName.getText();
+        String street = txtStreetAddress.getText();
+        String zip = txtZipCode.getText();
+        String city = txtCity.getText();
+        String contact = txtContact.getText();
+        String email = txtEmail.getText();
+        if(!orgServices.inputIsValid(name, street, zip, city, contact, email)) {
+            lblOutput.setText("Please fill all fields correctly.");
+        } else {
+            currentOrganisation.setName(name);
+            currentOrganisation.setStreetAddress(street);
+            currentOrganisation.setZipCode(zip);
+            currentOrganisation.setCity(city);
+            currentOrganisation.setContactPerson(contact);
+            currentOrganisation.setEmail(email);
+            if(currentOrganisation.getId() == null) {
+                orgServices.saveOrganisation(currentOrganisation);
+            } else {
+                
+            }
+            this.dispose();
+        }
+        
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments

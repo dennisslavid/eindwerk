@@ -47,6 +47,11 @@ public class AddInternshipScreen extends javax.swing.JFrame {
         txtDescription.setText(current.getDescription());
         lstOrganisations.setSelectedIndex(indexToSelect);
     }
+    
+    public void refreshList() {
+        allOrganisations = orgServices.getAllOrganisations();
+        lstOrganisations.setListData(allOrganisations.toArray());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,6 +79,13 @@ public class AddInternshipScreen extends javax.swing.JFrame {
         lblOutput = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         lblTitle.setText("Title:");
 
@@ -90,6 +102,11 @@ public class AddInternshipScreen extends javax.swing.JFrame {
         lblOrganisation.setText("Organisation:");
 
         btnAddOrganisation.setText("Add New Organisation");
+        btnAddOrganisation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddOrganisationActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -196,7 +213,7 @@ public class AddInternshipScreen extends javax.swing.JFrame {
         if(noOrgSelected != true) {
             org = (Organisation) lstOrganisations.getSelectedValue();
         }
-        if(internServices.inputIsValid(title, startDate, description, noOrgSelected) != true) {
+        if(!internServices.inputIsValid(title, startDate, description, noOrgSelected)) {
             lblOutput.setText("Please fill all fields correctly.");
         } else {
            formattedStartDate = internServices.transformToDate(startDate);
@@ -212,6 +229,15 @@ public class AddInternshipScreen extends javax.swing.JFrame {
            this.dispose();
         }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnAddOrganisationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddOrganisationActionPerformed
+        AddOrganisationScreen addOrgScreen = new AddOrganisationScreen();
+        addOrgScreen.setVisible(true);
+    }//GEN-LAST:event_btnAddOrganisationActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        this.refreshList();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments

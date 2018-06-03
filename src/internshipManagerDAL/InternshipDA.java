@@ -18,6 +18,7 @@ import org.hibernate.Transaction;
  * @author denni
  */
 public class InternshipDA {
+    
     public List<Internship> getAllInternships() {
         List<Internship> allInternships = new ArrayList<>();
         Transaction trans = null;
