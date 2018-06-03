@@ -24,12 +24,14 @@ public class AddInternshipScreen extends javax.swing.JFrame {
      */
     public AddInternshipScreen() {
         initComponents();
+        this.setTitle("Add new internship");
         allOrganisations = orgServices.getAllOrganisations();
         lstOrganisations.setListData(allOrganisations.toArray());
     }
     
     public AddInternshipScreen(Internship current) {
         initComponents();
+        this.setTitle("Edit internship");
         allOrganisations = orgServices.getAllOrganisations();
         Organisation currentOrganisation = current.getOrganisation();
         int indexToSelect = 0;
