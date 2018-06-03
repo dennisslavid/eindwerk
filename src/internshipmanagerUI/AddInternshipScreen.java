@@ -184,7 +184,8 @@ public class AddInternshipScreen extends javax.swing.JFrame {
            newInternship.setStartDate(new java.sql.Date(formattedStartDate.getTimeInMillis()));
            newInternship.setDescription(description);
            newInternship.setOrganisation(org);
-           lblOutput.setText("This is the point where I would Save :D");
+           internServices.saveInternship(newInternship);
+           this.dispose();
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 

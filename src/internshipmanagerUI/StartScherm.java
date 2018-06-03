@@ -22,6 +22,11 @@ public class StartScherm extends javax.swing.JFrame {
         allInternships = interServices.getAllInternships();
         lstInternships.setListData(allInternships.toArray());
     }
+    
+    public void refreshList() {
+        allInternships = interServices.getAllInternships();
+        lstInternships.setListData(allInternships.toArray());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,6 +49,13 @@ public class StartScherm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Internship Manager");
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         lblInternships.setText("Internships:");
 
@@ -116,6 +128,10 @@ public class StartScherm extends javax.swing.JFrame {
         AddInternshipScreen addScreen = new AddInternshipScreen();
         addScreen.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        this.refreshList();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments

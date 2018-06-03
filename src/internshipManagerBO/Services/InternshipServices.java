@@ -6,7 +6,6 @@ import internshipManagerDAL.NewHibernateUtil;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -34,6 +33,24 @@ public class InternshipServices {
             session.close();
         }
         return allInternships;
+    }
+    
+    public void saveInternship(Internship newInternship) {
+        Transaction trans = null;
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            trans = session.beginTransaction();
+            session.save(newInternship);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            if(trans != null) {
+                trans.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
     }
     
     public String getInternshipOrganisationName(int internshipId) {
