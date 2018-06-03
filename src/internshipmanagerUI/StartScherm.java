@@ -113,7 +113,8 @@ public class StartScherm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
+        AddInternshipScreen addScreen = new AddInternshipScreen();
+        addScreen.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
     /**
