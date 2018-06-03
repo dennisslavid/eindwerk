@@ -46,6 +46,8 @@ public class StartScherm extends javax.swing.JFrame {
         lblSearch = new javax.swing.JLabel();
         cbxSearch = new javax.swing.JComboBox<>();
         txtSearch = new javax.swing.JTextField();
+        barInfo = new javax.swing.JToolBar();
+        lblOutput = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Internship Manager");
@@ -67,6 +69,11 @@ public class StartScherm extends javax.swing.JFrame {
         });
 
         btnEdit.setText("Edit Internship Details");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete Internship");
 
@@ -75,6 +82,9 @@ public class StartScherm extends javax.swing.JFrame {
         lblSearch.setText("Search by:");
 
         cbxSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        barInfo.setRollover(true);
+        barInfo.add(lblOutput);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,7 +107,8 @@ public class StartScherm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(lblInternships)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(barInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -112,12 +123,14 @@ public class StartScherm extends javax.swing.JFrame {
                     .addComponent(lblSearch)
                     .addComponent(cbxSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(barInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -132,6 +145,17 @@ public class StartScherm extends javax.swing.JFrame {
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         this.refreshList();
     }//GEN-LAST:event_formWindowGainedFocus
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        boolean noInternshipSelected = lstInternships.isSelectionEmpty();
+        if(noInternshipSelected == false) {
+            Internship current = (Internship) lstInternships.getSelectedValue();
+            AddInternshipScreen addScreen = new AddInternshipScreen(current);
+            addScreen.setVisible(true);
+        } else {
+            lblOutput.setText("Please select an Internship to edit.");
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,12 +193,14 @@ public class StartScherm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToolBar barInfo;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JComboBox<String> cbxSearch;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblInternships;
+    private javax.swing.JLabel lblOutput;
     private javax.swing.JLabel lblSearch;
     private javax.swing.JList lstInternships;
     private javax.swing.JTextField txtSearch;

@@ -17,7 +17,7 @@ public class AddInternshipScreen extends javax.swing.JFrame {
     List<Organisation> allOrganisations = new ArrayList();
     OrganisationServices orgServices = new OrganisationServices();
     InternshipServices internServices = new InternshipServices();
-    Internship newInternship = new Internship();
+    Internship currentInternship = new Internship();
     
     /**
      * Creates new form AddInternshipScreen
@@ -26,6 +26,24 @@ public class AddInternshipScreen extends javax.swing.JFrame {
         initComponents();
         allOrganisations = orgServices.getAllOrganisations();
         lstOrganisations.setListData(allOrganisations.toArray());
+    }
+    
+    public AddInternshipScreen(Internship current) {
+        initComponents();
+        allOrganisations = orgServices.getAllOrganisations();
+        Organisation currentOrganisation = current.getOrganisation();
+        int indexToSelect = 0;
+        for(Organisation o : allOrganisations) {
+            if(o.getId() == currentOrganisation.getId()){
+                indexToSelect = allOrganisations.indexOf(o);
+            }
+        }
+        lstOrganisations.setListData(allOrganisations.toArray());
+        currentInternship = current;
+        txtTitle.setText(current.getTitle());
+        
+        txtDescription.setText(current.getDescription());
+        lstOrganisations.setSelectedIndex(indexToSelect);
     }
 
     /**
@@ -180,11 +198,15 @@ public class AddInternshipScreen extends javax.swing.JFrame {
             lblOutput.setText("Please fill all fields correctly.");
         } else {
            formattedStartDate = internServices.transformToDate(startDate);
-           newInternship.setTitle(title);
-           newInternship.setStartDate(new java.sql.Date(formattedStartDate.getTimeInMillis()));
-           newInternship.setDescription(description);
-           newInternship.setOrganisation(org);
-           internServices.saveInternship(newInternship);
+           currentInternship.setTitle(title);
+           currentInternship.setStartDate(new java.sql.Date(formattedStartDate.getTimeInMillis()));
+           currentInternship.setDescription(description);
+           currentInternship.setOrganisation(org);
+           if(currentInternship.getId() == null) {
+               internServices.saveInternship(currentInternship);
+           } else {
+               internServices.updateInternship(currentInternship);
+           }
            this.dispose();
         }
     }//GEN-LAST:event_btnSaveActionPerformed

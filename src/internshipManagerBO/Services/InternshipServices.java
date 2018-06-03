@@ -53,6 +53,24 @@ public class InternshipServices {
         }
     }
     
+    public void updateInternship(Internship internship) {
+        Transaction trans = null;
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            trans = session.beginTransaction();
+            session.update(internship);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            if(trans != null) {
+                trans.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+    }
+    
     public String getInternshipOrganisationName(int internshipId) {
         Organisation o = null;
         Internship i = null;
