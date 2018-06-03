@@ -43,7 +43,7 @@ public class AddInternshipScreen extends javax.swing.JFrame {
         lstOrganisations.setListData(allOrganisations.toArray());
         currentInternship = current;
         txtTitle.setText(current.getTitle());
-        
+        ftfDate.setText(internServices.transformDateToString(current.getStartDate()));
         txtDescription.setText(current.getDescription());
         lstOrganisations.setSelectedIndex(indexToSelect);
     }
