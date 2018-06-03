@@ -70,11 +70,13 @@ public class AddInternshipScreen extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescription = new javax.swing.JTextPane();
         lblOrganisation = new javax.swing.JLabel();
-        btnAddOrganisation = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
-        btnSave = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstOrganisations = new javax.swing.JList();
+        btnAddOrganisation = new javax.swing.JButton();
+        btnEditOrganisation = new javax.swing.JButton();
+        btnDeleteOrganisation = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         barInfo = new javax.swing.JToolBar();
         lblOutput = new javax.swing.JLabel();
 
@@ -101,10 +103,26 @@ public class AddInternshipScreen extends javax.swing.JFrame {
 
         lblOrganisation.setText("Organisation:");
 
+        jScrollPane2.setViewportView(lstOrganisations);
+
         btnAddOrganisation.setText("Add New Organisation");
         btnAddOrganisation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddOrganisationActionPerformed(evt);
+            }
+        });
+
+        btnEditOrganisation.setText("Edit Organisation");
+        btnEditOrganisation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditOrganisationActionPerformed(evt);
+            }
+        });
+
+        btnDeleteOrganisation.setText("Delete Organisation");
+        btnDeleteOrganisation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteOrganisationActionPerformed(evt);
             }
         });
 
@@ -121,8 +139,6 @@ public class AddInternshipScreen extends javax.swing.JFrame {
                 btnSaveActionPerformed(evt);
             }
         });
-
-        jScrollPane2.setViewportView(lstOrganisations);
 
         barInfo.setRollover(true);
         barInfo.add(lblOutput);
@@ -161,7 +177,10 @@ public class AddInternshipScreen extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAddOrganisation)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnAddOrganisation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnEditOrganisation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnDeleteOrganisation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -182,11 +201,15 @@ public class AddInternshipScreen extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAddOrganisation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblOrganisation)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblOrganisation)
+                            .addComponent(btnAddOrganisation, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEditOrganisation, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDeleteOrganisation, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
@@ -239,6 +262,14 @@ public class AddInternshipScreen extends javax.swing.JFrame {
         this.refreshList();
     }//GEN-LAST:event_formWindowGainedFocus
 
+    private void btnEditOrganisationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditOrganisationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditOrganisationActionPerformed
+
+    private void btnDeleteOrganisationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteOrganisationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteOrganisationActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -278,6 +309,8 @@ public class AddInternshipScreen extends javax.swing.JFrame {
     private javax.swing.JToolBar barInfo;
     private javax.swing.JButton btnAddOrganisation;
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDeleteOrganisation;
+    private javax.swing.JButton btnEditOrganisation;
     private javax.swing.JButton btnSave;
     private javax.swing.JFormattedTextField ftfDate;
     private javax.swing.JScrollPane jScrollPane1;
