@@ -143,7 +143,14 @@ public class StartScherm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        this.refreshList();
+        boolean nothingSelected = lstInternships.isSelectionEmpty();
+        if(nothingSelected) {
+            this.refreshList();
+        } else {
+            int indexToSelect = lstInternships.getSelectedIndex();
+            this.refreshList();
+            lstInternships.setSelectedIndex(indexToSelect);
+        }
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed

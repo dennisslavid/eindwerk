@@ -23,6 +23,10 @@ public class OrganisationServices {
         organisationDA.saveOrganisation(newOrganisation);
     }
     
+    public void updateOrganisation(Organisation organisation) {
+        organisationDA.updateOrganisation(organisation);
+    }
+    
     public boolean inputIsValid(String name, String street, String zip, 
                                 String city, String contact, String email) {
         boolean result = false;

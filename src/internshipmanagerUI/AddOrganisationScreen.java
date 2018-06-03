@@ -24,6 +24,18 @@ public class AddOrganisationScreen extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Add new organisation");
     }
+    
+    public AddOrganisationScreen(Organisation current) {
+        initComponents();
+        this.setTitle("Edit organisation");
+        currentOrganisation = current;
+        txtName.setText(current.getName());
+        txtStreetAddress.setText(current.getStreetAddress());
+        txtZipCode.setText(current.getZipCode());
+        txtCity.setText(current.getCity());
+        txtContact.setText(current.getContactPerson());
+        txtEmail.setText(current.getEmail());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -174,7 +186,7 @@ public class AddOrganisationScreen extends javax.swing.JFrame {
             if(currentOrganisation.getId() == null) {
                 orgServices.saveOrganisation(currentOrganisation);
             } else {
-                
+                orgServices.updateOrganisation(currentOrganisation);
             }
             this.dispose();
         }

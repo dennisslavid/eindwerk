@@ -50,4 +50,22 @@ public class OrganisationDA {
             session.close();
         }
     }
+    
+    public void updateOrganisation(Organisation organisation) {
+        Transaction trans = null;
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            trans = session.beginTransaction();
+            session.update(organisation);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            if(trans != null) {
+                trans.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+    }
 }

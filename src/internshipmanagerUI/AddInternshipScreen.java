@@ -259,11 +259,25 @@ public class AddInternshipScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddOrganisationActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        this.refreshList();
+        boolean nothingSelected = lstOrganisations.isSelectionEmpty();
+        if(nothingSelected) {
+            this.refreshList();
+        } else {
+            int indexToSelect = lstOrganisations.getSelectedIndex();
+            this.refreshList();
+            lstOrganisations.setSelectedIndex(indexToSelect);
+        }
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void btnEditOrganisationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditOrganisationActionPerformed
-        // TODO add your handling code here:
+        boolean noOrgSelected = lstOrganisations.isSelectionEmpty();
+        if(noOrgSelected == false) {
+            Organisation current = (Organisation) lstOrganisations.getSelectedValue();
+            AddOrganisationScreen addOrgScreen = new AddOrganisationScreen(current);
+            addOrgScreen.setVisible(true);
+        } else {
+            lblOutput.setText("Please select an Organisation to edit.");
+        }
     }//GEN-LAST:event_btnEditOrganisationActionPerformed
 
     private void btnDeleteOrganisationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteOrganisationActionPerformed
