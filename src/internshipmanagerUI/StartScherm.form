@@ -140,6 +140,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtSearch">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Search by Start date, Title, Organisation, City or Zip code... "/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnClearSearch">
       <Properties>

@@ -89,6 +89,8 @@ public class StartScherm extends javax.swing.JFrame {
 
         lblSearch.setText("Search:");
 
+        txtSearch.setToolTipText("Search by Start date, Title, Organisation, City or Zip code... ");
+
         btnClearSearch.setForeground(new java.awt.Color(255, 0, 0));
         btnClearSearch.setText("X");
         btnClearSearch.setToolTipText("Clear search");
