@@ -68,7 +68,19 @@ public class Internship  implements java.io.Serializable {
     public String toString() {
         InternshipServices service = new InternshipServices();
         String organisationName = service.getInternshipOrganisationName(this.id);
-        return this.title + ", " + organisationName;
+        String startDate = service.transformDateToString(this.startDate);
+        return this.title + ", " + organisationName + " - Startdate: " + startDate;
+    }
+    
+    public String searchify() {
+        String searchifiedInternship = "";
+        String stringifiedStartDate = "";
+        String searchifiedOrganisation = "";
+        InternshipServices service = new InternshipServices();
+        searchifiedOrganisation = service.getInternshipOrganisationSearchified(this.id);
+        stringifiedStartDate = service.transformDateToString(this.startDate);
+        searchifiedInternship = this.title + stringifiedStartDate + searchifiedOrganisation;
+        return searchifiedInternship.toLowerCase();
     }
 
 

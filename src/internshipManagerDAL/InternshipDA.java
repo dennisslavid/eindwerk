@@ -71,7 +71,7 @@ public class InternshipDA {
         }
     }
     
-    public static void deleteInternship(Internship current) {
+    public void deleteInternship(Internship current) {
         Transaction trans = null;
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         try {
@@ -110,5 +110,32 @@ public class InternshipDA {
             session.close();
         }
         return organisationName;
+    }
+    
+    public String getInternshipOrganisationSearchified(int internshipId) {
+        Organisation o = null;
+        Internship i = null;
+        Transaction trans = null;
+        String organisationName = "";
+        String organisationCity = "";
+        String organisationZip = "";
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            trans = session.beginTransaction();
+            String queryString = "from Internship where id = :id";
+            Query query = session.createQuery(queryString);
+            query.setInteger("id", internshipId);
+            i = (Internship) query.uniqueResult();
+            o = i.getOrganisation();
+            organisationName = o.getName();
+            organisationCity = o.getCity();
+            organisationZip = o.getZipCode();
+        } catch (RuntimeException e){
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return organisationName + organisationCity + organisationZip;
     }
 }

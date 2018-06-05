@@ -33,13 +33,31 @@ public class InternshipServices {
     }
     
     public void deleteInternship(Internship current) {
-         InternshipDA.deleteInternship(current);
+        internshipDA.deleteInternship(current);
     }
     
     public String getInternshipOrganisationName(int internshipId) {
         String organisationName = "Organisation not Found";
         organisationName = internshipDA.getInternshipOrganisationName(internshipId);
         return organisationName;
+    }
+    
+    public String getInternshipOrganisationSearchified(int internshipId) {
+        String searchifiedOrganisation = "";
+        searchifiedOrganisation = internshipDA.getInternshipOrganisationSearchified(internshipId);
+        return searchifiedOrganisation;
+    }
+    
+    public List<Internship> searchInternships(String searchQuery) {
+        List<Internship> allInternships = new ArrayList<>();
+        List<Internship> searchResults = new ArrayList<>();
+        allInternships = internshipDA.getAllInternships();
+        for(Internship item : allInternships) {
+            if(item.searchify().contains(searchQuery.toLowerCase())) {
+                searchResults.add(item);
+            }
+        }
+        return searchResults;
     }
     
     public boolean inputIsValid(String title, String startDate, String description, boolean noOrgSelected) {

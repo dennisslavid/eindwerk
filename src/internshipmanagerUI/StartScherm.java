@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class StartScherm extends javax.swing.JFrame {
 
-    List<Internship> allInternships = new ArrayList<>();
+    List<Internship> internshipsDisplayed = new ArrayList<>();
     InternshipServices interServices = new InternshipServices();
     
     /**
@@ -19,13 +19,15 @@ public class StartScherm extends javax.swing.JFrame {
      */
     public StartScherm() {
         initComponents();
-        allInternships = interServices.getAllInternships();
-        lstInternships.setListData(allInternships.toArray());
+        internshipsDisplayed = interServices.getAllInternships();
+        lstInternships.setListData(internshipsDisplayed.toArray());
     }
     
-    public void refreshList() {
-        allInternships = interServices.getAllInternships();
-        lstInternships.setListData(allInternships.toArray());
+    public void resetScreen() {
+        internshipsDisplayed = interServices.getAllInternships();
+        lstInternships.setListData(internshipsDisplayed.toArray());
+        lblOutput.setText("");
+        txtSearch.setText("");
     }
 
     /**
@@ -44,10 +46,11 @@ public class StartScherm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         lstInternships = new javax.swing.JList();
         lblSearch = new javax.swing.JLabel();
-        cbxSearch = new javax.swing.JComboBox<>();
         txtSearch = new javax.swing.JTextField();
+        btnClearSearch = new javax.swing.JButton();
         barInfo = new javax.swing.JToolBar();
         lblOutput = new javax.swing.JLabel();
+        btnSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Internship Manager");
@@ -84,12 +87,28 @@ public class StartScherm extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(lstInternships);
 
-        lblSearch.setText("Search by:");
+        lblSearch.setText("Search:");
 
-        cbxSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        btnClearSearch.setForeground(new java.awt.Color(255, 0, 0));
+        btnClearSearch.setText("X");
+        btnClearSearch.setToolTipText("Clear search");
+        btnClearSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearSearchActionPerformed(evt);
+            }
+        });
 
         barInfo.setRollover(true);
         barInfo.add(lblOutput);
+
+        btnSearch.setText("Search");
+        btnSearch.setToolTipText("Clear search");
+        btnSearch.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,22 +117,25 @@ public class StartScherm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lblSearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSearch))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(barInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(lblInternships)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(barInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(lblInternships))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lblSearch)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSearch)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnClearSearch)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -126,15 +148,16 @@ public class StartScherm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSearch)
-                    .addComponent(cbxSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClearSearch)
+                    .addComponent(btnSearch))
                 .addGap(18, 18, 18)
                 .addComponent(btnAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(barInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -148,14 +171,7 @@ public class StartScherm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        boolean nothingSelected = lstInternships.isSelectionEmpty();
-        if(nothingSelected) {
-            this.refreshList();
-        } else {
-            int indexToSelect = lstInternships.getSelectedIndex();
-            this.refreshList();
-            lstInternships.setSelectedIndex(indexToSelect);
-        }
+        this.resetScreen();
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -174,11 +190,26 @@ public class StartScherm extends javax.swing.JFrame {
         if(noInternshipSelected == false) {
             Internship current = (Internship) lstInternships.getSelectedValue();
             interServices.deleteInternship(current);
-            this.refreshList();
+            this.resetScreen();
         } else {
             lblOutput.setText("Please select an Internship to delete.");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        String searchQuery = txtSearch.getText();
+        internshipsDisplayed = interServices.searchInternships(searchQuery);
+        lstInternships.setListData(internshipsDisplayed.toArray());
+        if(!searchQuery.equalsIgnoreCase("")) {
+            lblOutput.setText("Found " + internshipsDisplayed.size() + " result(s) for '" 
+                            + searchQuery + "'...");
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnClearSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearSearchActionPerformed
+        txtSearch.setText("");
+        this.resetScreen();
+    }//GEN-LAST:event_btnClearSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,9 +249,10 @@ public class StartScherm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToolBar barInfo;
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnClearSearch;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JComboBox<String> cbxSearch;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblInternships;
     private javax.swing.JLabel lblOutput;
