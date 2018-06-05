@@ -7,7 +7,6 @@ import internshipManagerDAL.Entities.Organisation;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -68,8 +67,6 @@ public class AddInternshipScreen extends javax.swing.JFrame {
         lblStartDate = new javax.swing.JLabel();
         ftfDate = new javax.swing.JFormattedTextField();
         lblDescription = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtDescription = new javax.swing.JTextPane();
         lblOrganisation = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstOrganisations = new javax.swing.JList();
@@ -80,6 +77,8 @@ public class AddInternshipScreen extends javax.swing.JFrame {
         btnSave = new javax.swing.JButton();
         barInfo = new javax.swing.JToolBar();
         lblOutput = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtDescription = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -99,8 +98,6 @@ public class AddInternshipScreen extends javax.swing.JFrame {
         ftfDate.setToolTipText("dd/mm/yyyy");
 
         lblDescription.setText("Description:");
-
-        jScrollPane1.setViewportView(txtDescription);
 
         lblOrganisation.setText("Organisation:");
 
@@ -144,6 +141,12 @@ public class AddInternshipScreen extends javax.swing.JFrame {
         barInfo.setRollover(true);
         barInfo.add(lblOutput);
 
+        txtDescription.setColumns(20);
+        txtDescription.setLineWrap(true);
+        txtDescription.setRows(5);
+        txtDescription.setWrapStyleWord(true);
+        jScrollPane3.setViewportView(txtDescription);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,16 +162,11 @@ public class AddInternshipScreen extends javax.swing.JFrame {
                                     .addComponent(lblDescription)
                                     .addComponent(lblStartDate)
                                     .addComponent(lblTitle))
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(ftfDate, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ftfDate, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -199,7 +197,7 @@ public class AddInternshipScreen extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDescription)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
@@ -341,15 +339,15 @@ public class AddInternshipScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnEditOrganisation;
     private javax.swing.JButton btnSave;
     private javax.swing.JFormattedTextField ftfDate;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblOrganisation;
     private javax.swing.JLabel lblOutput;
     private javax.swing.JLabel lblStartDate;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JList lstOrganisations;
-    private javax.swing.JTextPane txtDescription;
+    private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtTitle;
     // End of variables declaration//GEN-END:variables
 }
