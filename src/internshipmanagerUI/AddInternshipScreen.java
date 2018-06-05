@@ -282,16 +282,17 @@ public class AddInternshipScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditOrganisationActionPerformed
 
     private void btnDeleteOrganisationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteOrganisationActionPerformed
+        lblOutput.setText("");
         boolean noOrgSelected = lstOrganisations.isSelectionEmpty();
         if(noOrgSelected == false) {
             Organisation current = (Organisation) lstOrganisations.getSelectedValue();
-            try {
+            if(!orgServices.hasInternship(current)) {
                 orgServices.deleteOrganisation(current);
-            } catch (RuntimeException e) {
-                lblOutput.setText("This organisation still has Internships, unable to delete.");
+                this.refreshList();
+            } else {
+                lblOutput.setText("This organisation still has one or more internships attached. Unable to delete.");
             }
             
-            this.refreshList();
         } else {
             lblOutput.setText("Please select an Organisation to delete.");
         }
