@@ -7,6 +7,7 @@ import internshipManagerDAL.Entities.Organisation;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -281,7 +282,19 @@ public class AddInternshipScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditOrganisationActionPerformed
 
     private void btnDeleteOrganisationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteOrganisationActionPerformed
-        // TODO add your handling code here:
+        boolean noOrgSelected = lstOrganisations.isSelectionEmpty();
+        if(noOrgSelected == false) {
+            Organisation current = (Organisation) lstOrganisations.getSelectedValue();
+            try {
+                orgServices.deleteOrganisation(current);
+            } catch (RuntimeException e) {
+                lblOutput.setText("This organisation still has Internships, unable to delete.");
+            }
+            
+            this.refreshList();
+        } else {
+            lblOutput.setText("Please select an Organisation to delete.");
+        }
     }//GEN-LAST:event_btnDeleteOrganisationActionPerformed
 
     /**

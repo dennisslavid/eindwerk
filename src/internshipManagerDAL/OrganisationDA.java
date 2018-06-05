@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.exception.ConstraintViolationException;
 
 /**
  *
@@ -57,6 +58,24 @@ public class OrganisationDA {
         try {
             trans = session.beginTransaction();
             session.update(organisation);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            if(trans != null) {
+                trans.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+    }
+    
+    public void deleteOrganisation(Organisation current) {
+        Transaction trans = null;
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            trans = session.beginTransaction();
+            session.delete(current);
             session.getTransaction().commit();
         } catch (RuntimeException e) {
             if(trans != null) {

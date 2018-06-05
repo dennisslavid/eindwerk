@@ -27,6 +27,10 @@ public class OrganisationServices {
         organisationDA.updateOrganisation(organisation);
     }
     
+    public void deleteOrganisation(Organisation current) {
+        organisationDA.deleteOrganisation(current);
+    }
+    
     public boolean inputIsValid(String name, String street, String zip, 
                                 String city, String contact, String email) {
         boolean result = false;
@@ -35,6 +39,12 @@ public class OrganisationServices {
                             && !"".equals(email)) {
             result = true;
         }
+        return result;
+    }
+    
+    public boolean hasRelatedInternship(Organisation org) {
+        boolean result = true;
+        
         return result;
     }
 }
