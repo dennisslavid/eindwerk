@@ -76,6 +76,11 @@ public class StartScherm extends javax.swing.JFrame {
         });
 
         btnDelete.setText("Delete Internship");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(lstInternships);
 
@@ -163,6 +168,17 @@ public class StartScherm extends javax.swing.JFrame {
             lblOutput.setText("Please select an Internship to edit.");
         }
     }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        boolean noInternshipSelected = lstInternships.isSelectionEmpty();
+        if(noInternshipSelected == false) {
+            Internship current = (Internship) lstInternships.getSelectedValue();
+            interServices.deleteInternship(current);
+            this.refreshList();
+        } else {
+            lblOutput.setText("Please select an Internship to delete.");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments

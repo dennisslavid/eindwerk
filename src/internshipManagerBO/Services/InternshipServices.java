@@ -32,6 +32,10 @@ public class InternshipServices {
         internshipDA.updateInternship(internship);
     }
     
+    public void deleteInternship(Internship current) {
+         InternshipDA.deleteInternship(current);
+    }
+    
     public String getInternshipOrganisationName(int internshipId) {
         String organisationName = "Organisation not Found";
         organisationName = internshipDA.getInternshipOrganisationName(internshipId);

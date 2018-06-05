@@ -18,7 +18,7 @@ import org.hibernate.Transaction;
  * @author denni
  */
 public class InternshipDA {
-    
+
     public List<Internship> getAllInternships() {
         List<Internship> allInternships = new ArrayList<>();
         Transaction trans = null;
@@ -59,6 +59,24 @@ public class InternshipDA {
         try {
             trans = session.beginTransaction();
             session.update(internship);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            if(trans != null) {
+                trans.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+    }
+    
+    public static void deleteInternship(Internship current) {
+        Transaction trans = null;
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            trans = session.beginTransaction();
+            session.delete(current);
             session.getTransaction().commit();
         } catch (RuntimeException e) {
             if(trans != null) {
