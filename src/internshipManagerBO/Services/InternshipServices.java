@@ -53,7 +53,7 @@ public class InternshipServices {
         List<Internship> searchResults = new ArrayList<>();
         allInternships = internshipDA.getAllInternships();
         for(Internship item : allInternships) {
-            if(item.searchify().contains(searchQuery.toLowerCase())) {
+            if(item.toSearchableString().contains(searchQuery.toLowerCase())) {
                 searchResults.add(item);
             }
         }

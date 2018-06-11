@@ -72,7 +72,7 @@ public class Internship  implements java.io.Serializable {
         return this.title + ", " + organisationName + " - Startdate: " + startDate;
     }
     
-    public String searchify() {
+    public String toSearchableString() {
         String searchifiedInternship = "";
         String stringifiedStartDate = "";
         String searchifiedOrganisation = "";
